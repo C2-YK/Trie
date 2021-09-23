@@ -10,4 +10,6 @@ class Node{
         ~Node();
         Node(const Node& other);
         Node& operator=(Node other);
+        void addWord(const std::string& s, int currentLevel);
+        bool searchWord(const std::string& s, int currentLevel);
 };
