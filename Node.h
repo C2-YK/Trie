@@ -1,3 +1,7 @@
+/*
+CS3505 2021fall
+u1230733 Christopher Chen
+*/
 #include <string>
 #include <vector>
 

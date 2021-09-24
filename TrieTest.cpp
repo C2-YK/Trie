@@ -1,9 +1,14 @@
+/*
+CS3505 2021fall
+u1230733 Christopher Chen
+*/
 #include "Trie.h"
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <vector>
 
+//read file
 std::vector<std::string> readFileToVector(const std::string& filename)
 {
     std::ifstream source;
@@ -18,17 +23,16 @@ std::vector<std::string> readFileToVector(const std::string& filename)
 }
 
 int main(int argc, char **argv){
+    //Trie function Test
     std::string wordsFilename(argv[1]);
     std::string queriesFilename(argv[2]);
     std::vector<std::string> words = readFileToVector(wordsFilename);
     std::vector<std::string> queries = readFileToVector(queriesFilename);
-
     Trie t;
 
     for(int i = 0; i < words.size(); i++){
         t.addAWord(words[i]);
     }
-
     for(int i = 0; i < queries.size(); i++){
         if(t.isAWord(queries[i])){
             std::cout << "word is found" << std::endl;
@@ -44,5 +48,10 @@ int main(int argc, char **argv){
             }
         }
     }
+    //Trie Rule-Of-Three
+    Trie t2 = t;
+    Trie* t3 = new Trie(t2);
+    delete t3;
+
     return 0;
 }

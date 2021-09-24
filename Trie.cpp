@@ -1,5 +1,8 @@
+/*
+CS3505 2021fall
+u1230733 Christopher Chen
+*/
 #include <string>
-#include "Node.h"
 #include <vector>
 #include "Trie.h"
 
@@ -30,7 +33,9 @@ bool Trie::isAWord(std::string s){
 
 std::vector<std::string> Trie::allWordsStartingWithPrefix(std::string s){
     std::vector<std::string> words = {};
+    //Find the starting node base on pass in prefix
     Node startingNode = *this->root->searchNode(s,0);
+    //From the starting node get all children word
     startingNode.addAllChildrenWordToList(s, words);
     return words;
 }
