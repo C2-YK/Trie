@@ -17,6 +17,7 @@ Trie::Trie(const Trie& other){
 
 Trie& Trie::operator=(Trie other){
     std::swap(this->root, other.root);
+    return *this;
 }
 
 void Trie::addAWord(std::string s){
@@ -24,9 +25,12 @@ void Trie::addAWord(std::string s){
 }
 
 bool Trie::isAWord(std::string s){
-    this->root->searchWord(s, 0);
+    return (*this->root->searchNode(s, 0)).getisEndOfWord();
 }
 
 std::vector<std::string> Trie::allWordsStartingWithPrefix(std::string s){
-
+    std::vector<std::string> words = {};
+    Node startingNode = *this->root->searchNode(s,0);
+    startingNode.addAllChildrenWordToList(s, words);
+    return words;
 }

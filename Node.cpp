@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 #include "Node.h"
 
 Node::Node(){
@@ -28,6 +29,7 @@ Node::Node(const Node& other){
 Node& Node::operator=(Node other){
     std::swap(this->isEndOfWord, other.isEndOfWord);
     std::swap(this->children, other.children);
+    return *this;
 }
 
 void Node::addWord(const std::string& s, int currentLevel){
@@ -42,14 +44,30 @@ void Node::addWord(const std::string& s, int currentLevel){
     }
 }
 
-bool Node::searchWord(const std::string& s, int currentLevel){
+Node* Node::searchNode(const std::string& s, int currentLevel){
     if(currentLevel < s.length()){
         int index = s[currentLevel] - 'a';
         if(!this->children[index]){
-            return false;
+            return NULL;
         }
-        return this->children[index]->searchWord(s, currentLevel++);
+        return this->children[index]->searchNode(s, currentLevel++);
     }else{
-        return this->isEndOfWord;
+        return this;
+    }
+}
+bool Node::getisEndOfWord(){
+    return isEndOfWord;
+}
+
+void Node::addAllChildrenWordToList(std::string s, std::vector<std::string>& l){
+    if(isEndOfWord){
+        l.push_back(s);
+    }
+    for(int i = 0; i < ALPHABET_SIZE; i++){
+        if(this->children[i]){
+            char c = i + 'a';
+            s.append(c);
+            this->children[i]->addAllChildrenWordToList(s, l);
+        }
     }
 }
