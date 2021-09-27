@@ -5,6 +5,7 @@ u1230733 Christopher Chen
 #include <string>
 #include <vector>
 #include "Node.h"
+#include <iostream>
 
 Node::Node(){
     this->isEndOfWord = false;
@@ -79,8 +80,7 @@ void Node::addAllChildrenWordToList(std::string s, std::vector<std::string>& l){
     for(int i = 0; i < ALPHABET_SIZE; i++){
         if(this->children[i]){
             char c = i + 'a';
-            s+=c;
-            this->children[i]->addAllChildrenWordToList(s, l);
+            this->children[i]->addAllChildrenWordToList(s+c, l);
         }
     }
 }

@@ -4,6 +4,7 @@ u1230733 Christopher Chen
 */
 #include <string>
 #include <vector>
+#include <iostream>
 
 const int ALPHABET_SIZE = 26;
 

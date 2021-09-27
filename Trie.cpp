@@ -28,14 +28,20 @@ void Trie::addAWord(std::string s){
 }
 
 bool Trie::isAWord(std::string s){
-    return (*this->root->searchNode(s, 0)).getisEndOfWord();
+    Node* n = this->root->searchNode(s, 0);
+    if(!n){
+        return false;
+    }
+    return (*n).getisEndOfWord();
 }
 
 std::vector<std::string> Trie::allWordsStartingWithPrefix(std::string s){
     std::vector<std::string> words = {};
     //Find the starting node base on pass in prefix
-    Node startingNode = *this->root->searchNode(s,0);
+    Node* startingNode = this->root->searchNode(s,0);
     //From the starting node get all children word
-    startingNode.addAllChildrenWordToList(s, words);
+    if(startingNode){
+        (*startingNode).addAllChildrenWordToList(s, words);
+    }
     return words;
 }
